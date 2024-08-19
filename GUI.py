@@ -140,7 +140,6 @@ while running:
     title_text = font.render('WORDLE' if current_language == "EN" else 'TERMO', True, text_color)
     title_rect = title_text.get_rect(center=(screen_width // 2, 50))
     screen.blit(title_text, title_rect)
-    print(wordToGuess)
     
     draw_grid()
     draw_attempts()
