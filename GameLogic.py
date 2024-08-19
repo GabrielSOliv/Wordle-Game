@@ -12,7 +12,7 @@ def SelectWord(language: str) -> str:
 def wordVerification (guessWord: str, rightWord: str):
     guessWord = str.lower(guessWord)
     if guessWord == rightWord:
-        return list(0,1,2,3,4)
+        return [0, 1, 2, 3, 4],[],[]
     
     remainingLetters = list(rightWord)
     rightLetters = []

@@ -123,6 +123,9 @@ def draw_error_message():
         error_rect = error_text.get_rect(center=(screen_width // 2, message_y_offset - 40))
         screen.blit(error_text, error_rect)
 
+def check_win_condition(rightIndices, wrongPlaceIndices, wrongIndices):
+    return len(rightIndices) == cols and not wrongPlaceIndices and not wrongIndices
+
 buttons = [
     {"label": "EN", "rect": pygame.Rect(button_x, button_y_start, button_width, button_height)},
     {"label": "PT", "rect": pygame.Rect(button_x, button_y_start + button_height + button_padding, button_width, button_height)}
@@ -137,7 +140,8 @@ while running:
     title_text = font.render('WORDLE' if current_language == "EN" else 'TERMO', True, text_color)
     title_rect = title_text.get_rect(center=(screen_width // 2, 50))
     screen.blit(title_text, title_rect)
-
+    print(wordToGuess)
+    
     draw_grid()
     draw_attempts()
     draw_input()
@@ -184,7 +188,7 @@ while running:
                             ]
                             all_attempts.append(attempt_result)
                             
-                            if guessWord == wordToGuess:
+                            if check_win_condition(rightIndices, wrongPlaceIndices, wrongIndices):
                                 game_result = "win"
                                 game_over = True
                             elif attempts >= max_attempts:
