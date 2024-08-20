@@ -28,7 +28,7 @@ message_y_offset = grid_y_offset + (rows * (cell_size + cell_padding)) + 20
 
 button_width, button_height = 50, 30
 button_padding = 10
-button_x = screen_width - button_width - 20
+button_x = screen_width - button_width - 5
 button_y_start = 20
 
 max_attempts = 6
@@ -44,7 +44,7 @@ def reset_game():
     all_attempts = []
     wordToGuess = GameLogic.SelectWord(current_language)
     show_error_message = False
-    pygame.display.set_caption('WORDLE' if current_language == "EN" else 'TERMO')
+    pygame.display.set_caption('WORDLE' if current_language == "EN" else 'TERMO' if current_language == "PT" else 'PALABRA' if current_language == "ES" else 'LE MOT')
 
 def get_result_message():
     if current_language == "EN":
@@ -52,17 +52,31 @@ def get_result_message():
             "win": "You won!",
             "lose": f"The word was {wordToGuess}"
         }
-    else:
+    elif current_language == "PT":
         return {
             "win": "Você ganhou!",
             "lose": f"A palavra era: {wordToGuess}"
+        }
+    elif current_language == "ES":
+        return {
+            "win": "¡Has ganado!",
+            "lose": f"La palabra era: {wordToGuess}"
+        }
+    else:  # FR
+        return {
+            "win": "Tu as gagné!",
+            "lose": f"Le mot était: {wordToGuess}"
         }
 
 def get_error_message():
     if current_language == "EN":
         return "This word does not exist"
-    else:
+    elif current_language == "PT":
         return "Essa palavra não existe"
+    elif current_language == "ES":
+        return "Esta palabra no existe"
+    else:  # FR
+        return "Ce mot n'existe pas"
 
 def draw_grid():
     for row in range(rows):
@@ -128,7 +142,9 @@ def check_win_condition(rightIndices, wrongPlaceIndices, wrongIndices):
 
 buttons = [
     {"label": "EN", "rect": pygame.Rect(button_x, button_y_start, button_width, button_height)},
-    {"label": "PT", "rect": pygame.Rect(button_x, button_y_start + button_height + button_padding, button_width, button_height)}
+    {"label": "PT", "rect": pygame.Rect(button_x, button_y_start + button_height + button_padding, button_width, button_height)},
+    {"label": "ES", "rect": pygame.Rect(button_x, button_y_start + 2 * (button_height + button_padding), button_width, button_height)},
+    {"label": "FR", "rect": pygame.Rect(button_x, button_y_start + 3 * (button_height + button_padding), button_width, button_height)}
 ]
 
 current_language = "PT"
@@ -137,7 +153,7 @@ reset_game()
 running = True
 while running:
     screen.fill(background_color)
-    title_text = font.render('WORDLE' if current_language == "EN" else 'TERMO', True, text_color)
+    title_text = font.render('WORDLE' if current_language == "EN" else 'TERMO' if current_language == "PT" else 'PALABRA' if current_language == "ES" else 'LE MOT', True, text_color)
     title_rect = title_text.get_rect(center=(screen_width // 2, 50))
     screen.blit(title_text, title_rect)
     
@@ -157,10 +173,13 @@ while running:
                 if button["rect"].collidepoint(mouse_pos):
                     if button["label"] == "EN":
                         current_language = "EN"
-                        reset_game()
                     elif button["label"] == "PT":
                         current_language = "PT"
-                        reset_game()
+                    elif button["label"] == "ES":
+                        current_language = "ES"
+                    elif button["label"] == "FR":
+                        current_language = "FR"
+                    reset_game()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_BACKSPACE:
                 if not game_over and current_col > 0:

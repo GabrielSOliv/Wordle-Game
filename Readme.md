@@ -19,13 +19,12 @@ Have fun!
 - **Create GUI**: ✔️ 
 - **Develop Game Logic**: ✔️
 - **Implement Language Support for English and Portuguese**: ✔️
-- **Add More Languages (e.g., Spanish, French, etc.)**: ☐
+- **Add More Languages (e.g., Spanish, French, etc.)**: ✔️
 - **Implement a Solver Algorithm**: ☐ 
 
 ## Future Enhancements
 
-1. **Multilingual Support**: Expand the game to include additional languages such as Spanish, French, and others. This will involve creating word lists and messages for each new language and integrating them into the game.
-2. **Solver Algorithm**: Develop an algorithm to solve the game automatically. This enhancement will provide insights into solving strategies and improve gameplay analysis.
+1. **Solver Algorithm**: Develop an algorithm to solve the game automatically. This enhancement will provide insights into solving strategies and improve gameplay analysis.
 
 ## Game Components
 
@@ -52,6 +51,5 @@ Have fun!
 
 ### Language Support
 
-- **Current Languages**: English and Portuguese
+- **Current Languages**: English, Portuguese, Spanish and French
 - **Implementation**: Language-specific word lists and messages are used to provide a localized experience.
-- **Goal**: To provide multilingual support, with initial implementation for English and Portuguese.
