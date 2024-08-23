@@ -422,7 +422,7 @@ casta
 midia
 trupe
 morna
-FALSO
+falso
 lidar
 afeto
 verso
